@@ -34,6 +34,20 @@ public class Registration {
             referencedColumnName = "id", nullable = false)
     private Course course;
 
+    @OneToOne
+    @JoinColumn(name = "id_student_fk",
+            foreignKey = @ForeignKey(name = "fk_registration_student"),
+            referencedColumnName = "id", nullable = false)
+    private Student student;
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
     public Long getId() {
         return id;
     }
