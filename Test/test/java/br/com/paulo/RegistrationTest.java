@@ -9,6 +9,7 @@ import br.com.paulo.domain.Classrom;
 import br.com.paulo.domain.Course;
 import br.com.paulo.domain.Registration;
 import br.com.paulo.domain.Student;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.Instant;
@@ -46,6 +47,12 @@ public class RegistrationTest {
         student.setRegistration(regis);
 
         registrationDAO.register(regis);
+
+        Assert.assertNotNull(regis);
+        Assert.assertNotNull(regis.getId());
+
+        Registration regisDB = registrationDAO.reshearByCodeCourse(regis.getCode());
+        Assert.assertEquals(regis.getCode(), regisDB.getCode());
     }
 
     public Course createCourse(String codigo) {
