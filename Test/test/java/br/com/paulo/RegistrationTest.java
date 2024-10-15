@@ -13,7 +13,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.Instant;
-import java.util.List;
 
 public class RegistrationTest {
 
@@ -34,7 +33,7 @@ public class RegistrationTest {
 
     @Test
     public void register() {
-        Course course = createCourse("A2");
+        Course course = createCourse("1");
         Student student = createStudent("A2");
 
         Registration regis = new Registration();
@@ -51,8 +50,11 @@ public class RegistrationTest {
         Assert.assertNotNull(regis);
         Assert.assertNotNull(regis.getId());
 
+        Registration regisDBC = registrationDAO.reshearByCourse(regis.getCourse());
+        Assert.assertEquals(regis.getId(), regisDBC.getId());
+
         Registration regisDB = registrationDAO.reshearByCodeCourse(regis.getCode());
-        Assert.assertEquals(regis.getCode(), regisDB.getCode());
+        Assert.assertEquals(regis.getId(), regisDB.getId());
     }
 
     public Course createCourse(String codigo) {
